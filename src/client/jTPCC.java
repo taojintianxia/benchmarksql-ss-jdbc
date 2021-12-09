@@ -58,6 +58,7 @@ public class jTPCC implements jTPCCConfig
     private double tpmC;
     private jTPCCRandom rnd;
     private OSCollector osCollector = null;
+	private static File JDBCYamlFile;
 
     public static void main(String args[])
     {
@@ -488,7 +489,10 @@ public class jTPCC implements jTPCCConfig
 			if (ssJdbcYamlLocation != null) {
 					// 创建 ShardingSphereDataSource
 					printMessage("Creating ss datasource ...");
-					DataSource dataSource = YamlShardingSphereDataSourceFactory.createDataSource(new File(ssJdbcYamlLocation));
+					if (JDBCYamlFile == null) {
+						JDBCYamlFile = new File(ssJdbcYamlLocation);
+					}
+					DataSource dataSource = YamlShardingSphereDataSourceFactory.createDataSource(JDBCYamlFile);
 					conn = dataSource.getConnection();
 				} else {
 					conn = DriverManager.getConnection(database, dbProps);
@@ -571,6 +575,7 @@ public class jTPCC implements jTPCCConfig
 
 		catch(Exception e1)
 		{
+			e1.printStackTrace();
 		    errorMessage("This session ended with errors!");
 		    printStreamReport.close();
 		    fileOutputStream.close();
