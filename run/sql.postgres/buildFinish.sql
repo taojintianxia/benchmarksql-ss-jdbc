@@ -4,4 +4,3 @@
 -- PostgreSQL version.
 -- ----
 
-# vacuum analyze;

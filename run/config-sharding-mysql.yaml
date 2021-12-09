@@ -71,10 +71,6 @@ rules:
           standard:
             shardingColumn: o_w_id
             shardingAlgorithmName: bmsql_oorder_database_inline
-        tableStrategy:
-          standard:
-            shardingColumn: o_c_id
-            shardingAlgorithmName: bmsql_oorder_table_inline
 
       bmsql_stock:
         actualDataNodes: ds_${0..1}.bmsql_stock
@@ -127,11 +123,6 @@ rules:
         type: INLINE
         props:
           algorithm-expression: ds_${o_w_id % 2}
-
-      bmsql_oorder_table_inline:
-        type: INLINE
-        props:
-          algorithm-expression: bmsql_oorder_${o_c_id % 2}
 
       bmsql_stock_database_inline:
         type: INLINE
