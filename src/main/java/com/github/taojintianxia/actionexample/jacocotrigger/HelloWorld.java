@@ -2,7 +2,8 @@ package com.github.taojintianxia.actionexample.jacocotrigger;
 
 public class HelloWorld {
     
-    public void sayHello() {
+    public String sayHello() {
         System.out.println(" hello world !");
+        return "hello";
     }
 }
