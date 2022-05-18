@@ -1,3 +1,4 @@
+# from https://github.com/kolpav/purge-artifacts-action
 name: Code Coverage
 
 on:
