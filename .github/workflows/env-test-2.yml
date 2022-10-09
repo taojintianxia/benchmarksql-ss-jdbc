@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run:
-          c >> $GITHUB_ENV
+          cat .github/workflows/.env >> $GITHUB_ENV
           echo ${{env.IS_QA}}
           echo ${{env.LOCAL_TAG}}
           echo ${{env.PROJECT}}
