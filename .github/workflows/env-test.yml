@@ -1,6 +1,6 @@
 name: env-test
 
-on: workflow_dispatch
+on: push
 
 jobs:
   test:
