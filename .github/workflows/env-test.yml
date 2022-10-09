@@ -10,8 +10,6 @@ jobs:
       PROJECT: "important"
     steps:
       - uses: actions/checkout@v2
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - run:
           echo ${{env.IS_QA}}
           echo ${{env.LOCAL_TAG}}
