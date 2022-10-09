@@ -1,0 +1,14 @@
+name: env-test-2
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run:
+          echo ${{env.IS_QA}}
+          echo ${{env.LOCAL_TAG}}
+          echo ${{env.PROJECT}}
+          echo ${{env.AWS_TASKDEF}}
