@@ -1,7 +1,6 @@
 name: env-test-2
 
-on:
-  project: created
+on: project
 
 jobs:
   test:
