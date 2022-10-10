@@ -1,11 +1,11 @@
 name: env-test-2
 
-on: push
+on:
+  project: created
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - uses: actions/checkout@v2
       - run:
