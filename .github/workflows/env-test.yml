@@ -1,6 +1,6 @@
-name: env-test-2
+name: env-test
 
-on: project
+on: push
 
 jobs:
   test:
@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run:
-          cat .github/workflows/.env >> $GITHUB_ENV
+          source .github/workflows/.env >> $GITHUB_ENV
           echo ${{env.IS_QA}}
           echo ${{env.LOCAL_TAG}}
           echo ${{env.PROJECT}}
