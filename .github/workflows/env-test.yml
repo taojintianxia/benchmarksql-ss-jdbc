@@ -1,15 +1,12 @@
 name: env-test
 
-on: push
+on:
+  schedule:
+    - cron: '0 59/5 * * *'  # once a day. UTC time
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          sh .github/workflows/resources/script/init_environments.sh
-          echo ${{env.IS_QA}}
-          echo ${{env.LOCAL_TAG}}
-          echo ${{env.PROJECT}}
-          echo ${{env.AWS_TASKDEF}}
+      - run: echo "Hello World!"
