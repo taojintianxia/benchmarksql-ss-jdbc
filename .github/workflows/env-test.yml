@@ -3,6 +3,7 @@ name: env-test
 on:
   schedule:
     - cron: '*/10 * * * *'
+
 jobs:
   test:
     runs-on: ubuntu-latest
