@@ -2,8 +2,7 @@ name: env-test
 
 on:
   schedule:
-    - cron: '0 59/5 * * *'  # once a day. UTC time
-
+    - cron: '*/5 * * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
