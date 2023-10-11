@@ -3,7 +3,7 @@ on:
   push
 
 jobs:
-  delete-artifacts:
+  send-feishu-message:
     runs-on: ubuntu-latest
     steps:
       - name: Send feishu message
@@ -11,8 +11,8 @@ jobs:
           ACTIONS_FEISHU_TAG: 'v1.3.1' # 替换此变量, 最新见 https://github.com/xiachufang/actions-feishu/releases
           INPUT_WEBHOOK: "${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}"
           INPUT_MESSAGE_TYPE: "post"
-          INPUT_TITLE: "I'm title"
-          INPUT_CONTENT: "I'm message body\nfrom: ${{ github.repository }}"
+          INPUT_TITLE: "Warning"
+          INPUT_CONTENT: "got code diff from: ${{ github.repository }}"
         run: |
           wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
           tar zxf linux-amd64-actions-feishu.tar.gz feishu
