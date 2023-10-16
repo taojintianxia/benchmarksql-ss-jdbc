@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     needs: [ test-matrix ]
-    if: ${{ always() && steps.test-matrix.outcome != 'success' }}
+    if: ${{ always() }} && steps.test-matrix.outcome != 'success'
     steps:
       - name: Send Failure Message
         timeout-minutes: 5
