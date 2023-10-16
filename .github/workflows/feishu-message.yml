@@ -37,7 +37,8 @@ jobs:
           INPUT_TITLE: "Warning"
           INPUT_CONTENT: "Detected test error \nplease check result for details"
         run: |
-          echo "running here"
+          echo "steps.test-matrix.outcome" ${{ steps.test-matrix.outcome }}
+          echo "needs.test-matrix.result" ${{ needs.test-matrix.result }}
 #          wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
 #          tar zxf linux-amd64-actions-feishu.tar.gz feishu
 #          ./feishu
