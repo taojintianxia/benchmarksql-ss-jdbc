@@ -18,7 +18,7 @@ jobs:
           echo "adapter: ${{ matrix.adapter }}"
           echo "mode: ${{ matrix.mode }}"
           if [ "${{ matrix.adapter }}" == "proxy" ]; then
-            echo "exit"
+            echo "exit" && exit 1
           fi
 
   send-failure-message:
@@ -37,10 +37,7 @@ jobs:
           INPUT_TITLE: "Warning"
           INPUT_CONTENT: "Detected test error \nplease check result for details"
         run: |
-          echo "steps.test-matrix.outcome" ${{ steps.test-matrix.outcome }}
-          echo "needs.test-matrix.result" ${{ needs.test-matrix.result }}
-          
-          echo
+          echo ${{ github.workflow }}
 #          wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
 #          tar zxf linux-amd64-actions-feishu.tar.gz feishu
 #          ./feishu
