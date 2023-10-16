@@ -29,7 +29,6 @@ jobs:
     steps:
       - name: Send Failure Message
         timeout-minutes: 5
-        if: failure()
         env:
           ACTIONS_FEISHU_TAG: 'v1.3.1' # see https://github.com/xiachufang/actions-feishu/releases
           INPUT_WEBHOOK: "${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}"
