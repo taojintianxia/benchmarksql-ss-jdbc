@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     needs: [ test-matrix ]
-    if: always()
+    if: always() && (needs.test-matrix.result == 'failure')
     steps:
       - name: Send Failure Message
         timeout-minutes: 5
@@ -40,7 +40,7 @@ jobs:
           echo "steps.test-matrix.outcome" ${{ steps.test-matrix.outcome }}
           echo "needs.test-matrix.result" ${{ needs.test-matrix.result }}
           
-          echo ${{ needs.test-matrix.result == 'failure' }}
+          echo
 #          wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
 #          tar zxf linux-amd64-actions-feishu.tar.gz feishu
 #          ./feishu
