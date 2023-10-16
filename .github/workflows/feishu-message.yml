@@ -1,19 +1,45 @@
-name: 'Delete Expired Artifacts'
+name: 'Test Feishu Message'
 on:
   push
 
 jobs:
-  send-feishu-message:
+  
+  test-matrix:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
+    strategy:
+      max-parallel: 3
+      fail-fast: false
+      matrix:
+        adapter: [ proxy, jdbc ]
+        mode: [ Standalone, Cluster ]
     steps:
-      - name: Send feishu message
+      - name: Print
+        run: |
+          echo "adapter: ${{ matrix.adapter }}"
+          echo "mode: ${{ matrix.mode }}"
+          if [ "${{ matrix.adapter }}" == "proxy" ]; then
+            echo "exit" && exit 1
+          fi
+
+  send-failure-message:
+    name: Send Failure Message
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    needs: [ test-matrix ]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    steps:
+      - name: Send Failure Message
+        timeout-minutes: 5
+        if: failure()
         env:
-          ACTIONS_FEISHU_TAG: 'v1.3.1' # 替换此变量, 最新见 https://github.com/xiachufang/actions-feishu/releases
+          ACTIONS_FEISHU_TAG: 'v1.3.1' # see https://github.com/xiachufang/actions-feishu/releases
           INPUT_WEBHOOK: "${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}"
           INPUT_MESSAGE_TYPE: "post"
           INPUT_TITLE: "Warning"
-          INPUT_CONTENT: "got code diff from: ${{ github.repository }}"
+          INPUT_CONTENT: "Detected test error \nplease check result for details"
         run: |
           wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
           tar zxf linux-amd64-actions-feishu.tar.gz feishu
           ./feishu
+    
